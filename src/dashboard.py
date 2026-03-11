@@ -17,7 +17,7 @@ def load_data_from_db():
     conn.close()
 
     if not df.empty:
-        df["timestamp"] = pd.to_datetime(df["timestamp"])
+        df["timestamp"] = pd.to_datetime(df["timestamp"], format="mixed", errors="coerce")
 
     return df
 
@@ -69,7 +69,7 @@ df = pd.DataFrame()
 
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
-    df["timestamp"] = pd.to_datetime(df["timestamp"])
+    df["timestamp"] = pd.to_datetime(df["timestamp"], format="mixed", errors="coerce")
 
     st.sidebar.success("CSV loaded successfully")
 
